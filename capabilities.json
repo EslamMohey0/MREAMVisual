@@ -1,0 +1,30 @@
+{
+  "dataRoles": [
+    {
+      "name": "contractType",
+      "kind": "Grouping",
+      "displayName": "Contract Type"
+    },
+    {
+      "name": "count",
+      "kind": "Measure",
+      "displayName": "Count"
+    }
+  ],
+  "dataViewMappings": [
+    {
+      "categorical": {
+        "categories": {
+          "for": { "in": "contractType" },
+          "dataReductionAlgorithm": { "top": {} }
+        },
+        "values": {
+          "for": { "in": "count" }
+        }
+      }
+    }
+  ],
+  "objects": {},
+  "suppressDefaultTitle": true,
+  "privileges": []
+}

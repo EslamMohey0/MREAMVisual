@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "outDir": "./.tmp/build/",
+    "declaration": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@style/*": [
+        "./src/style/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
+    }
+  },
+  "files": [
+    "src/visual.tsx"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "./src/**/*",
+    "tailwind.config.ts"
+  ]
+}

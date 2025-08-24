@@ -1,0 +1,22 @@
+@import "./colors.less";
+@import "./layout.less";
+
+/* Loader utilities */
+.show-loader {
+  display: block;
+}
+.hide-loader {
+  display: none;
+}
+
+body:has(.show-loader) {
+  overflow: hidden;
+}
+
+/* General styling */
+body {
+  background-color: var(--color-black);
+}
+section {
+  margin-bottom: 24px;
+}

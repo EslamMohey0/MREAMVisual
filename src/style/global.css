@@ -1,0 +1,148 @@
+/* Custom CSS classes for Power BI visual */
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+.bg-primary {
+  background-color: #171717;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-secondary {
+  border-color: #64748b;
+}
+
+.text-white {
+  color: white;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-40px {
+  font-size: 2.5rem;
+}
+
+.react-container {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.react-visual-container {
+  width: 100%;
+  height: 100%;
+}
+
+.text-18px {
+  font-size: 1.125rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.chart-bar-container {
+  width: 100%;
+}
+
+.chart-bar-wrapper {
+  width: 100%;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  min-width: 4px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+/* Ensure chart bars are visible */
+.chart-bar-wrapper {
+  width: 100%;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 24px;
+  position: relative;
+}
+
+.chart-bar {
+  min-width: 4px;
+  height: 24px;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,25 @@
+{
+  "visual": {
+    "name": "mREAMVisual",
+    "displayName": "MREAM Visual",
+    "guid": "mREAMVisualC7DBA24B37B849308CADE79F3B8969FC",
+    "visualClassName": "Visual",
+    "version": "1.0.0.0",
+    "description": "Custom Power BI visual for MREAM Dashboard",
+    "supportUrl": "https://www.totplatform.com/",
+    "gitHubUrl": "https://github.com/orgs/TOTPLATFORM/dashboard"
+  },
+  "apiVersion": "5.1.0",
+  "author": {
+    "name": "TOTPlatform",
+    "email": "https://www.totplatform.com/"
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": "dependencies.json",
+  "stringResources": []
+}
