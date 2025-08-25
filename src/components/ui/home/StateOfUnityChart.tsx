@@ -56,12 +56,34 @@ export const StateOfUnityChart = ({
   };
 
   return (
-    <div className="bg-primary p-4 rounded-xl border border-secondary">
-      <div className="bg-black p-4 rounded-xl">
+    <div
+      className="border border-secondary"
+      style={{
+        width: '355px',
+        height: '475px',
+        gap: '16px',
+        opacity: 1,
+        borderRadius: '12px',
+        // padding: '16px',
+        background: 'var(--B-GROUND, #0D0D0D)'
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          // alignItems: 'stretch',
+          alignItems: "center",
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          // gap: '16px',
+        }}
+      >
         {/* Circular Chart */}
-        <div className="flex justify-center mb-6">
-          <div style={{ position: 'relative', width: '192px', height: '192px' }}>
-            <PieChart width={192} height={192}>
+        <div className="flex justify-center" style={{  marginBottom: '16px' }}>
+          <div style={{ position: 'relative', width: '177px', height: '177px' }}>
+            <PieChart width={177} height={177}>
               <Pie
                 data={displayedChartData}
                 cx="50%"
@@ -87,48 +109,74 @@ export const StateOfUnityChart = ({
           </div>
         </div>
 
-        <div className="space-y-4">
-          {chartData.map((item, index) => (
-            <div key={item.name} className="flex flex-col gap-3">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <div
-                    style={{
-                      backgroundColor:
-                        hoveredIndex === index ? "#F5C730" : item.color,
-                    }}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  >
-                    <Building className="text-white w-4 h-4" />
-                  </div>
+        <div className="space-y-4" style={{ alignItems: 'stretch', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {displayedListData.map((item, index) => {
+            const percent = total > 0 ? (item.value / total) * 100 : 0;
+            return (
+            <div key={item.name} className="flex flex-col" onClick={() => handleSliceClick(index)} style={{ cursor: 'pointer', gap: '8px' }}>
+              <div className="flex" style={{ flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start', width: '100%', gap: '8px' }}>
+                {/* Totals row (left) */}
+                <div className="flex" style={{ flexDirection: 'row', alignItems: 'stretch', justifyContent: 'space-between', width: '100%', gap: '8px' }}>
                   <div
                     className={`${
-                      hoveredIndex === index
-                        ? "text-[#F5C730]"
-                        : "text-white"
-                    } text-sm font-medium`}>
-                    {item.label}
+                      hoveredIndex === index ? "text-[#F5C730]" : "text-white"
+                    } text-sm font-medium`}
+                    style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', gap: '12px', color: '#9CA3AF' }}
+                  >
+                    <span>{total.toLocaleString()}</span>
+                    <span>/</span>
+                    <span>{item.value.toLocaleString()}</span>
+                  </div>
+                    {/* Label + icon (right) */}
+                  <div className="flex items-center" style={{ gap: '8px', justifyContent: 'flex-end' }}>
+                    <div
+                      className={`${
+                        hoveredIndex === null
+                          ? 'text-white'
+                          : hoveredIndex === index
+                          ? 'text-white'
+                          : 'text-[#F5C730]'
+                      } text-sm font-medium`}
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      {item.label}
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: item.color,
+                        border: '2px solid rgba(255,255,255,0.85)',
+                        borderRadius: '50%'
+                      }}
+                      className="w-8 h-8 rounded-full flex items-center justify-center"
+                    >
+                      <Building className="text-white w-4 h-4" />
+                    </div>
                   </div>
                 </div>
+                {/* Progress bar */}
                 <div
-                  className={`${
-                    hoveredIndex === index ? "text-[#F5C730]" : "text-white"
-                  } text-sm font-medium`}>
-                  {total.toLocaleString()} / {item.value.toLocaleString()}
+                  style={{
+                    width: '100%',
+                    backgroundColor: '#272727',
+                    borderRadius: '9999px',
+                    height: '8px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${percent}%`,
+                      height: '8px',
+                      borderRadius: '9999px',
+                      transition: 'width 300ms ease',
+                      backgroundColor:
+                        hoveredIndex === index ? '#F5C730' : item.color,
+                    }}
+                  />
                 </div>
               </div>
-              <div className="flex-1 bg-gray-700 rounded-full h-3">
-                <div
-                  className="h-3 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${(item.value / total) * 100}%`,
-                    backgroundColor:
-                      hoveredIndex === index ? "#F5C730" : item.color,
-                  }}
-                />
-              </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

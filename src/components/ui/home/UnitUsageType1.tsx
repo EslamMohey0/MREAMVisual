@@ -2,17 +2,44 @@
 import * as React from "react";
 import { useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import "../../../style/global.less";
 
 interface UnitUsageDataItem {
   key: string;
   value: number;
 }
 
+
 interface UnitUsageTypeProps {
-  data: { label: string; value: number; color: string }[];
+    data: any;
+    allowInteractions: boolean;
 }
 
-export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div
+        style={{
+          backgroundColor: "var(--color-primary)",
+          border: "1px solid var(--color-secondary)",
+          borderRadius: "8px",
+          padding: "12px",
+          color: "white",
+          fontSize: "14px",
+        }}
+      >
+        <p style={{ margin: "0 0 8px 0", fontWeight: "bold" }}>{data.label}</p>
+        <p style={{ margin: "0", color: "white" }}>
+          القيمة: {data.value.toLocaleString()}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
+export const UnitUsageType = ({ data, allowInteractions }: UnitUsageTypeProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<{ chart: number; index:number} | null>(null);
 
   const chartData = data.map((item) => ({
@@ -51,6 +78,10 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
 
   return (
     <div className="bg-primary p-4 rounded-xl border border-secondary col-span-1">
+      <p className="text-white font-medium text-[18px] mb-4 bg-black p-4 rounded-xl text-center">
+        نوع استخدام الوحدة
+      </p>
+
       <div className="bg-black p-4 rounded-xl flex items-center gap-5">
         <div className="flex justify-center">
           <div className="relative w-50 h-80">
@@ -144,6 +175,9 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
                 >
                   <Cell fill="#374151" />
                 </Pie> */}
+                {allowInteractions && (
+                  <Tooltip content={<CustomTooltip />} />
+                )}
               </PieChart>
             </ResponsiveContainer>
           </div>

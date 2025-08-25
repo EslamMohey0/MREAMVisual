@@ -5,6 +5,7 @@ import * as React from "react";
 import { Header } from "./Header";
 import { TypeOfContractsChart } from "./TypeOfContractsChart";
 import { StateOfUnityChart } from "./StateOfUnityChart";
+import { UnitUsageType } from "./UnitUsageType";
 
 interface AppProps {
   data: { label: string; value: number; color: string }[];
@@ -15,13 +16,19 @@ export const App: React.FC<AppProps> = ({ data }) => {
   console.log('App component data:', data);
   
   // Transform data to match StateOfUnityChart interface
-  const transformedData = data.map(item => ({
-    key: item.label,
-    value: item.value
+  // const transformedData = data.map(item => ({
+  //   key: item.label,
+  //   value: item.value
+  // }));
+  const unitUsageData = data.map(d => ({
+    label: d.label,
+    value: d.value,
+    color: d.color,
   }));
-  
   return (
-    <StateOfUnityChart data={transformedData} />
+    // <StateOfUnityChart data={transformedData} />
+    <UnitUsageType data={unitUsageData} />
+    // RealEstatePortfolioClassification2Props
   );
 };
 

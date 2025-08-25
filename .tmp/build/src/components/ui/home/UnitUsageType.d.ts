@@ -1,7 +1,9 @@
-import "../../../style/global.less";
 interface UnitUsageTypeProps {
-    data: any;
-    allowInteractions: boolean;
+    data: {
+        label: string;
+        value: number;
+        color: string;
+    }[];
 }
-export declare const UnitUsageType: ({ data, allowInteractions }: UnitUsageTypeProps) => import("react/jsx-runtime").JSX.Element;
+export declare const UnitUsageType: ({ data }: UnitUsageTypeProps) => import("react/jsx-runtime").JSX.Element;
 export {};

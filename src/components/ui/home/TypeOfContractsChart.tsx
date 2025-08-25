@@ -16,6 +16,7 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
   data,
 }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
 
   // Debug: Check if data is received
   console.log('TypeOfContractsChart data:', data);
@@ -24,6 +25,12 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
 
   const handleMouseEnter = (data: any, index: number) => {
     setHoveredIndex(index);
+  };
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+  const handleBarClick = (index: number) => {
+    setSelectedIndex(prev => (prev === index ? null : index));
   };
 
   if (!data || data.length === 0) {
@@ -59,6 +66,9 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
     return labels;
   };
 
+
+  // Apply selection to dataset for rendering
+  const displayedData = selectedIndex !== null ? [data[selectedIndex]] : data;
 
   return (
     <div
@@ -120,7 +130,7 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
           }}
         >
 
-          {data.map((item, index) => {
+          {displayedData.map((item, index) => {
             const barHeight = (item.value / maxValue) * chartHeight;
             const remainingHeight = roundedMax * chartHeight / maxValue - barHeight;
 
@@ -129,6 +139,8 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
                 key={index}
                 className="chart-bar-column"
                 onMouseEnter={() => handleMouseEnter(item, index)}
+                onMouseLeave={handleMouseLeave}
+                onClick={() => handleBarClick(index)}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -136,6 +148,7 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
                   height: '100%',
                   width: '40px',
                   position: 'relative',
+                  cursor: 'pointer',
                 }}
               >
 
@@ -155,11 +168,12 @@ export const TypeOfContractsChart: React.FC<TypeOfContractsChartProps> = ({
                   style={{
                     height: barHeight,
                     width: '100%',
-                    backgroundColor: '#F5C730',
+                    backgroundColor: hoveredIndex === index ? '#FFD54A' : '#F5C730',
                     borderRadius: '12px',
                     minHeight: '4px',
                     position: 'absolute',
                     bottom: 0,
+                    boxShadow: hoveredIndex === index ? '0 0 0 2px rgba(245,199,48,0.4) inset' : 'none',
                   }}
                 />
                 {/* X-axis label */}
