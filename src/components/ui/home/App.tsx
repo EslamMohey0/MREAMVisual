@@ -22,7 +22,6 @@ export const App: React.FC<AppProps> = ({ data }) => {
   
   return (
     <StateOfUnityChart data={transformedData} />
-    // <TypeOfContractsChart data={data} />
   );
 };
 

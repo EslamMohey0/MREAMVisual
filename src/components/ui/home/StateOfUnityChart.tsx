@@ -20,6 +20,7 @@ export const StateOfUnityChart = ({
   data,
 }: StateOfUnityChartProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   // Define specific colors for each category
   const colors = ['#10B981', '#F5C730', '#3B82F6', '#6B7280'];
@@ -31,8 +32,16 @@ export const StateOfUnityChart = ({
     label: item.key,
   }));
 
-  // Calculate total for percentage calculations
+  // Calculate total for percentage calculations (use full dataset as baseline)
   const total = data.reduce((sum, item) => sum + item.value, 0);
+
+  // Filtered view based on selection
+  const displayedChartData = selectedIndex !== null
+    ? [chartData[selectedIndex]]
+    : chartData;
+  const displayedListData = selectedIndex !== null
+    ? [chartData[selectedIndex]]
+    : chartData;
 
   const handleMouseEnter = (data: any, index: number) => {
     setHoveredIndex(index);
@@ -42,36 +51,39 @@ export const StateOfUnityChart = ({
     setHoveredIndex(null);
   };
 
+  const handleSliceClick = (index: number) => {
+    setSelectedIndex(prev => (prev === index ? null : index));
+  };
+
   return (
     <div className="bg-primary p-4 rounded-xl border border-secondary">
       <div className="bg-black p-4 rounded-xl">
         {/* Circular Chart */}
         <div className="flex justify-center mb-6">
-          <div className="relative w-48 h-48">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={65}
-                  outerRadius={80}
-                  paddingAngle={4}
-                  dataKey="value"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  cornerRadius={40}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={hoveredIndex === index ? "#F5C730" : entry.color}
-                      stroke="none"
-                    />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
+          <div style={{ position: 'relative', width: '192px', height: '192px' }}>
+            <PieChart width={192} height={192}>
+              <Pie
+                data={displayedChartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={65}
+                outerRadius={80}
+                paddingAngle={4}
+                dataKey="value"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                cornerRadius={40}
+                onClick={(_, idx) => handleSliceClick(idx as number)}
+              >
+                {displayedChartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={hoveredIndex === index ? "#F5C730" : entry.color}
+                    stroke="none"
+                  />
+                ))}
+              </Pie>
+            </PieChart>
           </div>
         </div>
 
