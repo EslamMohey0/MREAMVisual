@@ -52,7 +52,8 @@ export const StateOfUnityChart = ({
   };
 
   const handleSliceClick = (index: number) => {
-    setSelectedIndex(prev => (prev === index ? null : index));
+    setHoveredIndex(index);
+    
   };
 
   return (
