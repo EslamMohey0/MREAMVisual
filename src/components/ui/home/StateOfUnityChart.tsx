@@ -100,7 +100,7 @@ export const StateOfUnityChart = ({
                 {displayedChartData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={hoveredIndex === index ? "#F5C730" : entry.color}
+                    fill={hoveredIndex === index ? "#ff5656ff" : entry.color}
                     stroke="none"
                   />
                 ))}

@@ -13,7 +13,7 @@ interface UnitUsageTypeProps {
 }
 
 export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
-  const [hoveredIndex, setHoveredIndex] = useState<{ chart: number; index:number} | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<{ chart: number; index: number } | null>(null);
 
   const chartData = data.map((item) => ({
     name: item.label,
@@ -33,27 +33,101 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
     },
   ]);
 
-  const handleMouseEnter = (chart:number, index: number) => {
-    setHoveredIndex({chart,index});
+  const handleMouseEnter = (chart: number, index: number) => {
+    setHoveredIndex({ chart, index });
   };
 
 
-   const handleMouseEnter1 = (data: any, index: number) =>
-     handleMouseEnter(1, index);
-   const handleMouseEnter2 = (data: any, index: number) =>
-     handleMouseEnter(2, index);
-   const handleMouseEnter3 = (data: any, index: number) =>
-     handleMouseEnter(3, index);
+  const handleMouseEnter1 = (data: any, index: number) =>
+    handleMouseEnter(1, index);
+  const handleMouseEnter2 = (data: any, index: number) =>
+    handleMouseEnter(2, index);
+  const handleMouseEnter3 = (data: any, index: number) =>
+    handleMouseEnter(3, index);
 
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
 
   return (
-    <div className="bg-primary p-4 rounded-xl border border-secondary col-span-1">
-      <div className="bg-black p-4 rounded-xl flex items-center gap-5">
-        <div className="flex justify-center">
-          <div className="relative w-50 h-80">
+    <div
+      style={{
+        width: '483.1778259277344px',
+        height: '286.1146240234375px',
+        gap: '64px',
+        opacity: 1,
+        borderRadius: '17.41px',
+        // padding: '17.41px 17.41px 17.41px 30px ',
+        background: 'var(--B-GROUND, #0D0D0D)'
+      }}
+    >
+      <div className="flex items-center" 
+        style={{ 
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-evenly',
+          width: '100%',
+          gap: '64px',
+          marginLeft:'30px',
+        }}
+      >
+        <div className="flex-1" style={{ direction: 'rtl', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {chartData.map((item, index) => (
+              <div
+                key={item.name}
+                className="flex items-center justify-between text-white"
+              >
+                <div className="flex items-center" style={{ gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '9999px',
+                      backgroundColor:
+                        hoveredIndex?.chart === index + 1
+                          ? '#F5C730'
+                          : index === 0
+                            ? '#10B981'
+                            : index === 1
+                              ? '#3B82F6'
+                              : '#F59E0B'
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: 'Cairo, sans-serif',
+                      fontWeight: 400,
+                      fontStyle: 'normal',
+                      fontSize: '16px',
+                      lineHeight: '100%',
+                      letterSpacing: 0,
+                      textAlign: 'right',
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'Cairo, sans-serif',
+                    fontWeight: 400,
+                    fontStyle: 'normal',
+                    fontSize: '16px',
+                    lineHeight: '100%',
+                    letterSpacing: 0,
+                    textAlign: 'right',
+                    color: '#FFFFFF'
+                  }}
+                >
+                  {item.value.toLocaleString()}
+                </div>
+              </div>
+            ))}
+        </div>
+        <div style={{ position: 'relative', width: '100%', height: '100%', padding: '13px', transform: 'rotate(-0.3deg)' }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -72,11 +146,11 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
                     <Cell
                       key={`outer-cell-${index}`}
                       fill={
-                        hoveredIndex?.index === index && hoveredIndex?.chart===1
+                        hoveredIndex?.index === index && hoveredIndex?.chart === 1
                           ? "#F5C730"
                           : index === 0
-                          ? "#10B981"
-                          : "#444444"
+                            ? "#10B981"
+                            : "#444444"
                       }
                       stroke="none"
                     />
@@ -98,11 +172,11 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
                     <Cell
                       key={`middle-cell-${index}`}
                       fill={
-                        hoveredIndex?.index === index && hoveredIndex?.chart===2
+                        hoveredIndex?.index === index && hoveredIndex?.chart === 2
                           ? "#F5C730"
                           : index === 0
-                          ? "#3B82F6"
-                          : "#444444"
+                            ? "#3B82F6"
+                            : "#444444"
                       }
                       stroke="none"
                     />
@@ -124,11 +198,11 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
                     <Cell
                       key={`inner-cell-${index}`}
                       fill={
-                        hoveredIndex?.index === index && hoveredIndex?.chart===3
+                        hoveredIndex?.index === index && hoveredIndex?.chart === 3
                           ? "#F5C730"
                           : index === 0
-                          ? "#F59E0B"
-                          : "#444444"
+                            ? "#F59E0B"
+                            : "#444444"
                       }
                       stroke='none'
                     />
@@ -147,31 +221,7 @@ export const UnitUsageType = ({ data }: UnitUsageTypeProps) => {
               </PieChart>
             </ResponsiveContainer>
           </div>
-        </div>
-        <div className="flex-1 space-y-3">
-          {chartData.map((item, index) => (
-            <div
-              key={item.name}
-              className="flex items-center justify-between text-white"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-3 h-3 rounded-full ${
-                    hoveredIndex?.chart===index+1
-                      ? "bg-[#F5C730]"
-                      : index === 0
-                      ? "bg-[#10B981]"
-                      : index === 1
-                      ? "bg-[#3B82F6]"
-                      : "bg-[#F59E0B]"
-                  }`}
-                ></div>
-                <span className="text-sm font-medium">{item.label}</span>
-              </div>
-              <div className="text-sm">{item.value.toLocaleString()}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </div>
   );

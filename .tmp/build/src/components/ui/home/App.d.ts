@@ -7,6 +7,7 @@ interface AppProps {
         value: number;
         color: string;
     }[];
+    onSliceHover?: (index: number) => void;
 }
 export declare const App: React.FC<AppProps>;
 export {};
